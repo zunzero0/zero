@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="사진 속 궁금한 색을 눌러 큰 글자와 한국어 음성으로 확인하세요.">
+<title>색봄 · 일상 색 확인</title>
+<style>
+:root{color-scheme:light;--ink:#142b27;--muted:#526862;--green:#12634c;--line:#dce6e1;--soft:#eef6f2}
+*{box-sizing:border-box}body{margin:0;background:#f8faf9;color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:16px;line-height:1.65}button,input{font:inherit}button,.file-button{cursor:pointer}button:disabled{cursor:default;opacity:.45}button:focus-visible,a:focus-visible,input:focus-visible,canvas:focus-visible{outline:3px solid #235bd1;outline-offset:4px}button{border:1px solid var(--line);border-radius:12px;padding:12px 18px;background:white;color:var(--ink);font-weight:650}button:hover:enabled{background:var(--soft)}.primary{background:var(--green);color:white;border-color:var(--green)}.primary:hover:enabled{background:#0b4e3b}.small{padding:7px 12px;font-size:.9rem}.muted{color:var(--muted)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}
+header{max-width:1120px;margin:auto;padding:25px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:10px;font-size:1.4rem;font-weight:800;letter-spacing:-1px}.brand-mark{display:grid;place-items:center;width:35px;height:35px;background:var(--green);color:white;border-radius:11px;font-size:1.5rem}.tagline{font-size:.9rem;font-weight:400;letter-spacing:0;margin-left:12px;color:var(--muted)}main{max-width:1120px;margin:0 auto;padding:42px 28px}.eyebrow{font-size:.9rem;color:var(--green);font-weight:750;margin:0 0 8px}h1{font-size:clamp(1.9rem,4vw,2.6rem);letter-spacing:-1.6px;line-height:1.3;margin:0 0 12px}p{margin:0 0 18px}.intro{margin-bottom:30px}.workspace{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:24px;align-items:start}.card{background:white;border:1px solid var(--line);border-radius:22px;overflow:hidden}.card-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line)}h2{margin:0;font-size:1.05rem}.stage{position:relative;min-height:360px;background:var(--soft);display:flex;align-items:center;justify-content:center;padding:22px}.empty{text-align:center;max-width:300px;padding:26px 8px}.empty svg{color:var(--green);margin-bottom:16px}.empty strong{display:block;font-size:1.2rem;margin-bottom:8px}.empty p{font-size:.95rem}.image-wrap{position:relative;max-width:100%;line-height:0}canvas{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;cursor:crosshair;border-radius:8px;touch-action:manipulation}.marker{position:absolute;width:25px;height:25px;border:3px solid white;box-shadow:0 0 0 2px #162e27;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}.toolbar{padding:18px 22px;display:flex;flex-wrap:wrap;gap:10px}.photo-tip{padding:0 22px 18px;font-size:.9rem;color:var(--muted);margin:0}.result{padding:25px}.result-label{font-weight:650;margin-bottom:20px;display:flex;align-items:center;gap:9px}.swatch{width:16px;height:16px;border:1px solid #56736a;border-radius:50%;background:#edf3ef}.color-name{font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-1.5px;font-weight:800;line-height:1.3;margin:14px 0}.color-meta{font-family:ui-monospace,monospace;font-size:.95rem;color:var(--muted);margin-bottom:24px}.read{width:100%;margin-bottom:20px}.status{padding:12px 14px;background:var(--soft);border-radius:12px;font-size:.95rem;white-space:pre-line}.warning{background:#fff3d9;color:#674500}.settings-summary{font-size:.9rem;color:var(--muted);padding-top:16px;margin:0}.tools{padding:20px 24px;border-top:1px solid var(--line)}.tools summary{cursor:pointer;font-weight:650}.tools p{font-size:.9rem;color:var(--muted);margin:10px 0}.tool-buttons{display:flex;flex-wrap:wrap;gap:8px}.steps{margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.step{border-top:1px solid var(--line);padding-top:15px}.step strong{display:block;margin-bottom:4px;font-size:.95rem}.step p{font-size:.9rem;color:var(--muted)}footer{margin-top:20px;font-size:.85rem;color:var(--muted)}dialog{border:1px solid var(--line);border-radius:22px;padding:28px;max-width:420px;width:calc(100% - 32px);color:var(--ink)}dialog::backdrop{background:#122d2855;backdrop-filter:blur(4px)}dialog h2{font-size:1.5rem;margin-bottom:8px}dialog label{display:flex;align-items:center;gap:12px;padding:16px;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;cursor:pointer}input[type=checkbox]{width:22px;height:22px;accent-color:var(--green)}.dialog-buttons{display:flex;gap:10px;margin-top:18px}.dialog-buttons button{flex:1}#setting-error{color:#a32c20;font-size:.95rem}
+@media(max-width:760px){header{padding:18px 20px}.tagline{display:none}main{padding:28px 18px}.workspace{grid-template-columns:1fr;gap:18px}.intro{margin-bottom:24px}.stage{min-height:290px}.steps{grid-template-columns:1fr;gap:4px}.result{padding:22px}.color-name{font-size:2.4rem}.toolbar button{flex:1;padding:12px 8px}footer{margin-top:14px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><span class="brand-mark" aria-hidden="true">◒</span>색봄<span class="tagline">일상 속 색을 더 쉽게</span></div><button id="settings-open" class="small">안내 설정</button></header>
+<main>
+<div class="intro"><p class="eyebrow">나만의 작은 색 안내 도구</p><h1>이 색이 궁금할 때, 색봄.</h1><p class="muted">사진을 찍고 궁금한 곳을 눌러 보세요.<br>색 이름을 큰 글자와 목소리로 알려드려요.</p></div>
+<div class="workspace">
+<section class="card" aria-labelledby="photo-title">
+<div class="card-head"><h2 id="photo-title">사진에서 색 찾기</h2><button id="demo" class="small">예시로 체험</button></div>
+<div class="stage">
+<div class="empty" id="empty"><svg width="56" height="56" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M17 13l3-5h9l3 5h7a4 4 0 014 4v21a4 4 0 01-4 4H9a4 4 0 01-4-4V17a4 4 0 014-4h8z" stroke="currentColor" stroke-width="2.5"/><circle cx="24" cy="27" r="8" stroke="currentColor" stroke-width="2.5"/></svg><strong>어떤 색인지 함께 볼까요?</strong><p class="muted">옷이나 물건을 촬영하거나<br>이미 있는 사진을 선택해 주세요.</p></div>
+<div class="image-wrap" id="image-wrap" hidden><canvas id="photo" tabindex="0" role="img" aria-label="사진 속 원하는 위치를 누르세요. 키보드 방향키로 위치를 옮기고 Enter로 확인할 수도 있습니다."></canvas><span class="marker" id="marker" aria-hidden="true"></span></div>
+</div>
+<div class="toolbar"><button class="primary" id="camera-open">사진 촬영</button><button id="upload-open">사진 불러오기</button></div>
+<p class="photo-tip">사진의 중앙 색을 먼저 확인해요. 다른 부분을 누르면 그곳의 색을 알려드려요.</p>
+<input id="camera" type="file" accept="image/*" capture="environment" hidden><input id="upload" type="file" accept="image/*" hidden>
+</section>
+<section class="card" aria-labelledby="result-title">
+<div class="result">
+<h2 class="result-label" id="result-title"><span class="swatch" id="swatch" aria-hidden="true"></span>선택한 곳의 색</h2>
+<div id="text-result" aria-live="polite" aria-atomic="true"><p class="color-name" id="color-name">아직 사진이 없어요</p><p class="color-meta" id="color-meta">사진을 선택하면 여기에 표시돼요</p></div>
+<p id="voice-result" hidden>음성으로 색 이름을 안내하고 있어요.</p>
+<button id="read" class="read" disabled>색 이름 다시 듣기</button>
+<div id="status" class="status" role="status">밝은 곳에서, 그림자와 반사를 피해 촬영해 주세요.</div>
+<p id="settings-summary" class="settings-summary"></p>
+</div>
+<details class="tools"><summary>조명 보정 도구</summary><p>사진에 실제 흰색인 물체가 있을 때만 사용하세요. 기준을 지정한 뒤 사진의 흰 부분을 누르면 색 분석에 보정이 적용돼요.</p><div class="tool-buttons"><button id="calibrate" class="small" disabled>흰색 기준 지정</button><button id="reset" class="small" disabled>보정 해제</button></div><p id="calibration-status">보정 사용 안 함 · 원본 사진은 바뀌지 않아요.</p></details>
+</section>
+</div>
+<div class="steps"><div class="step"><strong>사진 찍기</strong><p>확인하고 싶은 부분이 잘 보이게 촬영하세요.</p></div><div class="step"><strong>궁금한 곳 누르기</strong><p>사진을 누르면 그 주변의 평균 색을 확인해요.</p></div><div class="step"><strong>편한 방식으로 확인</strong><p>글자, 음성 또는 둘 다 선택할 수 있어요.</p></div></div>
+<footer>사진은 기기 안에서 분석하며 서버로 보내지 않아요. 조명과 카메라에 따라 실제 색과 차이가 있을 수 있어요.</footer>
+</main>
+<dialog id="settings" aria-labelledby="settings-title"><h2 id="settings-title">어떻게 알려드릴까요?</h2><p class="muted">편한 안내 방식을 골라 주세요.<br>다음에도 이 설정을 기억할게요.</p><label><input id="show-text" type="checkbox" checked>큰 글자로 색 이름 보기</label><label><input id="use-voice" type="checkbox" checked>목소리로 색 이름 듣기</label><p id="setting-error" role="alert"></p><div class="dialog-buttons"><button id="settings-cancel">닫기</button><button id="settings-save" class="primary">설정 저장</button></div></dialog>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const canvas = $('photo'), ctx = canvas.getContext('2d', {willReadFrequently:true});
+let preferences = {text:true, voice:true}, hasSaved = false;
+let loaded = false, point = {x:0, y:0}, lastName = '', gains = [1,1,1], pickingWhite = false;
+try { const saved = JSON.parse(localStorage.getItem('saekbom-settings')); if(saved && typeof saved.text === 'boolean' && typeof saved.voice === 'boolean' && (saved.text || saved.voice)){preferences=saved;hasSaved=true;} } catch {}
+function setStatus(message, warning=false){$('status').textContent=message;$('status').classList.toggle('warning',warning);}
+function speak(message){
+  if(!('speechSynthesis' in window)){setStatus('이 브라우저는 음성 안내를 지원하지 않아요. 안내 설정에서 글자 표시를 켜 주세요.',true);return;}
+  speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(message); utterance.lang='ko-KR';utterance.rate=.9;
+  const voice=speechSynthesis.getVoices().find(v=>v.lang.startsWith('ko'));if(voice)utterance.voice=voice;
+  utterance.onerror=e=>{if(!['canceled','interrupted'].includes(e.error))setStatus('음성을 재생하지 못했어요. 기기의 한국어 음성과 소리 설정을 확인해 주세요.',true);};
+  speechSynthesis.speak(utterance);
+}
+function applySettings(){
+  $('text-result').hidden=!preferences.text;$('voice-result').hidden=preferences.text || !loaded;
+  $('settings-summary').textContent='현재 안내: '+[preferences.text?'글자':'',preferences.voice?'음성':''].filter(Boolean).join(' + ');
+  $('read').disabled=!loaded || !('speechSynthesis' in window);
+}
+function openSettings(){ $('show-text').checked=preferences.text;$('use-voice').checked=preferences.voice;$('setting-error').textContent='';$('settings-cancel').hidden=!hasSaved;$('settings').showModal(); }
+$('settings-open').onclick=openSettings;
+$('settings-cancel').onclick=()=>$('settings').close();
+$('settings').addEventListener('cancel',e=>{if(!hasSaved)e.preventDefault();});
+$('settings-save').onclick=()=>{
+  const text=$('show-text').checked,voice=$('use-voice').checked;
+  if(!text&&!voice){$('setting-error').textContent='안내 방식을 1개 이상 선택해 주세요.';return;}
+  preferences={text,voice};hasSaved=true;let stored=true;
+  try{localStorage.setItem('saekbom-settings',JSON.stringify(preferences));}catch{stored=false;}
+  $('settings').close();applySettings();setStatus(stored?'안내 설정을 저장했어요. 사진을 선택해 주세요.':'이 브라우저에서 설정을 저장할 수 없어요. 이번 실행에는 선택한 방식을 사용해요.',!stored);
+  if(voice)speak('음성 안내가 켜졌어요.');
+};
+// RGB를 색상(H), 채도(S), 밝기(V)로 바꾸어 일상적인 색 이름을 구합니다.
+function colorName(r,g,b){
+  const max=Math.max(r,g,b),min=Math.min(r,g,b),delta=max-min,v=max/255,s=max===0?0:delta/max;
+  if(v<.13)return '검은색';
+  if(s<.13){if(v>.91)return '흰색';return v<.4?'진한 회색':v>.72?'연한 회색':'회색';}
+  let h=delta===0?0:max===r?((g-b)/delta)%6:max===g?(b-r)/delta+2:(r-g)/delta+4;
+  h=(h*60+360)%360;
+  if(h>=15&&h<50&&v<.64)return v<.34?'진한 갈색':'갈색';
+  if(h>=15&&h<50&&s<.42&&v>.65)return '베이지색';
+  if((h>=340||h<15)&&v>.72&&s<.55)return '분홍색';
+  const base=h<15||h>=345?'빨간색':h<45?'주황색':h<68?'노란색':h<85?'연두색':h<165?'초록색':h<195?'청록색':h<255?'파란색':h<290?'보라색':'자주색';
+  if(v<.48)return '진한 '+base;
+  if(s<.42&&v>.7)return '연한 '+base;
+  return base;
+}
+function sample(x,y){
+  const radius=5,left=Math.max(0,x-radius),top=Math.max(0,y-radius);
+  const pixels=ctx.getImageData(left,top,Math.min(canvas.width-left,radius*2+1),Math.min(canvas.height-top,radius*2+1)).data;
+  const sums=[0,0,0];let lum=0,lumSq=0,n=0;
+  for(let i=0;i<pixels.length;i+=4){if(pixels[i+3]<128)continue;for(let c=0;c<3;c++)sums[c]+=pixels[i+c];const l=.2126*pixels[i]+.7152*pixels[i+1]+.0722*pixels[i+2];lum+=l;lumSq+=l*l;n++;}
+  if(!n)return {rgb:[255,255,255],brightness:255,spread:0};
+  return {rgb:sums.map(c=>c/n),brightness:lum/n,spread:Math.sqrt(Math.max(0,lumSq/n-(lum/n)**2))};
+}
+function analyze(announce=true){
+  if(!loaded)return;
+  const data=sample(point.x,point.y),rgb=data.rgb.map((v,i)=>Math.round(Math.max(0,Math.min(255,v*gains[i]))));
+  lastName=colorName(...rgb);const hex='#'+rgb.map(v=>v.toString(16).padStart(2,'0')).join('').toUpperCase();
+  $('color-name').textContent=lastName;$('color-meta').textContent=hex+' · RGB '+rgb.join(', ');$('swatch').style.background=hex;
+  $('marker').style.left=((point.x+.5)/canvas.width*100)+'%';$('marker').style.top=((point.y+.5)/canvas.height*100)+'%';
+  let caution='';
+  if(data.brightness<32)caution='선택한 부분이 아주 어두워요. 검은 물체가 아니라면 밝은 곳에서 다시 촬영해 주세요.';
+  else if(data.spread>45)caution='여러 색이나 경계가 섞여 있어요. 한 가지 색의 안쪽을 다시 눌러 주세요.';
+  setStatus(caution||'선택한 부분의 색을 확인했어요. 다른 곳도 눌러 보세요.',!!caution);
+  applySettings();if(announce&&preferences.voice)speak(lastName+'. '+caution);
+}
+function selectPoint(x,y){
+  point={x:Math.max(0,Math.min(canvas.width-1,Math.round(x))),y:Math.max(0,Math.min(canvas.height-1,Math.round(y)))};
+  if(pickingWhite){
+    const {rgb,brightness,spread}=sample(point.x,point.y);
+    if(brightness<65||Math.min(...rgb)<30||spread>35){setStatus('균일하고 밝은 흰 부분을 다시 골라 주세요.',true);return;}
+    const average=rgb.reduce((a,b)=>a+b)/3;gains=rgb.map(v=>Math.max(.5,Math.min(2,average/v)));pickingWhite=false;
+    $('calibrate').textContent='흰색 기준 지정';$('reset').disabled=false;$('calibration-status').textContent='흰색 기준 보정 중 · 확인할 색을 다시 눌러 주세요.';
+    setStatus('흰색 기준을 지정했어요. 이제 확인할 색을 눌러 주세요.');if(preferences.voice)speak('흰색 기준을 지정했어요. 확인할 색을 눌러 주세요.');return;
+  }
+  analyze();
+}
+canvas.addEventListener('click',e=>{const rect=canvas.getBoundingClientRect();selectPoint((e.clientX-rect.left)/rect.width*canvas.width,(e.clientY-rect.top)/rect.height*canvas.height);});
+canvas.addEventListener('keydown',e=>{
+  if(!loaded)return;const moves={ArrowLeft:[-5,0],ArrowRight:[5,0],ArrowUp:[0,-5],ArrowDown:[0,5]};
+  if(moves[e.key]){e.preventDefault();selectPoint(point.x+moves[e.key][0],point.y+moves[e.key][1]);}
+  else if(e.key==='Enter'||e.key===' '){e.preventDefault();selectPoint(point.x,point.y);}
+});
+function resetCalibration(){gains=[1,1,1];pickingWhite=false;$('calibrate').textContent='흰색 기준 지정';$('reset').disabled=true;$('calibration-status').textContent='보정 사용 안 함 · 원본 사진은 바뀌지 않아요.';}
+function photoReady(initialPoint){
+  loaded=true;resetCalibration();$('empty').hidden=true;$('image-wrap').hidden=false;$('calibrate').disabled=false;
+  $('image-wrap').style.width='min(100%, '+(520*canvas.width/canvas.height)+'px)';
+  point=initialPoint||{x:Math.floor(canvas.width/2),y:Math.floor(canvas.height/2)};analyze();
+}
+let loadRequest=0;
+async function loadFile(input){
+  const file=input.files[0];if(!file)return;const request=++loadRequest;
+  if(file.size>30*1024*1024){setStatus('사진이 너무 커요. 30MB 이하의 사진을 선택해 주세요.',true);input.value='';return;}
+  const url=URL.createObjectURL(file),img=new Image();
+  try{await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=url;});if(request!==loadRequest)return;
+    const scale=Math.min(1,1400/Math.max(img.naturalWidth,img.naturalHeight));canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));
+    ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);photoReady();
+  }catch{if(request===loadRequest)setStatus('사진을 열지 못했어요. JPG, PNG 또는 WebP 사진으로 다시 선택해 주세요.',true);}
+  finally{URL.revokeObjectURL(url);input.value='';}
+}
+$('camera-open').onclick=()=>$('camera').click();$('upload-open').onclick=()=>$('upload').click();
+$('camera').onchange=()=>loadFile($('camera'));$('upload').onchange=()=>loadFile($('upload'));
+$('read').onclick=()=>{if(lastName)speak(lastName);};
+$('calibrate').onclick=()=>{pickingWhite=!pickingWhite;$('calibrate').textContent=pickingWhite?'기준 지정 취소':'흰색 기준 지정';const message=pickingWhite?'사진에서 실제로 흰색인 부분을 눌러 주세요.':'흰색 기준 지정을 취소했어요.';setStatus(message);if(preferences.voice)speak(message);};
+$('reset').onclick=()=>{resetCalibration();analyze();};
+$('demo').onclick=()=>{
+  loadRequest++;canvas.width=720;canvas.height=480;ctx.fillStyle='#e8eeeb';ctx.fillRect(0,0,720,480);
+  const colors=['#d65555','#719d79','#e8c360','#6187b8'];
+  colors.forEach((color,i)=>{const x=48+(i%2)*330,y=35+Math.floor(i/2)*215;ctx.fillStyle='#00000010';ctx.fillRect(x+7,y+7,290,178);ctx.fillStyle=color;ctx.fillRect(x,y,290,178);ctx.strokeStyle='#ffffff55';ctx.lineWidth=3;ctx.strokeRect(x+12,y+12,266,154);});
+  photoReady({x:190,y:120});
+};
+applySettings();if(!hasSaved)openSettings();
+</script>
+</body>
+</html>
